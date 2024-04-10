@@ -1,6 +1,6 @@
 # Infinity Caramelo
 
-This website is based in "Useless Website"
+This website is based in "Long Doge Challenge"
 
 ![Long Doge Challenge](https://longdogechallenge.com/assets/share.png)
 

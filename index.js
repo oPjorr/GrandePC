@@ -1,33 +1,33 @@
 const wrapper = document.querySelector(".wrapper")
-const neck = document.querySelector(".neck")
+const pescoco = document.querySelector(".neck")
 const wowEl = document.querySelector("#wows")
 
-const largeWowContainer = document.querySelector("#largewowcontainer")
-const rainbowWowContainer = document.querySelector("#rainbowwowcontainer")
-const dogePrimeContainer = document.querySelector("#dogeprimecontainer")
+const containerGrandeWow = document.querySelector("#largewowcontainer")
+const wowArcoIriEl = document.querySelector("#rainbowwowcontainer")
+const carameloPrimordial = document.querySelector("#carameloprimecontainer")
 const secretWowContainer = document.querySelector("#secretwowcontainer")
 const fibowowcontainer = document.querySelector("#fibowowcontainer")
 
-const largewowEl = document.querySelector("#largeWows")
+const largewowEl = document.querySelector("#largewow")
 const lengthEl = document.querySelector("#length")
-const rainbowsEl = document.querySelector("#rainbow")
-const dogePrimeEl = document.querySelector("#dogeprime")
-const secretWowEl = document.querySelector("#secretwow")
+const arcoIrisEl= document.querySelector("#rainbow")
+const carameloPrimeEl = document.querySelector("#carameloprime")
+const wowSecretoEl = document.querySelector("#secretwow")
 const fiboWowEl = document.querySelector("#fibo")
 
 let wows = 0
-let largewows = 0
+let grandewow = 0
 let rainbowwows = 0
 let secretwows = 0
-let minidoges = 0
+let minicaramelos = 0
 const primeWows = []
-const largeWowsRequired = 10
+const grandewowRequired = 10
 
 let fibonacciChallengeStarted = false
 let fibonacciChallengeComplete = false
 const fibonacciWows = []
 const fibonacciSecretWows = []
-let dogePrime = false
+let carameloPrime = false
 
 document.querySelector(".print").addEventListener("click", () => {
   if (fibonacciChallengeComplete) {
@@ -41,106 +41,119 @@ const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio > 0) {
-        injectNeck(entry)
+        AdicionaPescoco(entry)
       }
     })
   },
   { rootMargin: "0px 0px 200% 0px" }
 )
 
-document.addEventListener("click", onBodyClick)
+document.addEventListener("click", onClick)
 
 window.onscroll = function(ev) {
   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-    const lastEl = document.querySelector(".neck:last-child")
-    injectNeck({ target: lastEl })
+    const lastEl = document.querySelector(".pescoco:last-child")
+    AdicionaPescoco({ target: lastEl })
   }
 }
 
-function injectNeck(entry) {
-  // Stops observing the old neck element
+function AdicionaPescoco(entry) {
   observer.unobserve(entry.target)
 
-  const clonedNeck = neck.cloneNode(true)
-  wrapper.appendChild(clonedNeck)
-  observer.observe(clonedNeck)
+  const clonedpescoco = pescoco.cloneNode(true)
+  wrapper.appendChild(clonedpescoco)
+  observer.observe(clonedpescoco)
 
-  injectWow()
+  AdicionaWow()
 }
 
-function injectWow() {
+function AdicionaWow() {
   wows++
   wowEl.innerText = wows
-
-  const newWow = document.createElement("div")
-  newWow.className = "textwow"
-  newWow.innerText = "WOW"
-  newWow.style.left = 100 + Math.random() * (window.innerWidth - 300) + "px"
-  newWow.style.top = wrapper.offsetHeight - 200 + "px"
-  document.body.appendChild(newWow)
-
-  if (isPrime(wows)) {
-    primeWows.push(newWow)
-  }
-
-  if (isFibonacci(wows)) {
-    fibonacciWows.push(newWow)
-  }
+  const corIntensidade = Math.min(Math.floor(wows / 10000 * 255), 255);
+  const novoWow = document.createElement("div")
+  novoWow.className = "textwow"
+  novoWow.innerText = "WOW"
+  novoWow.style.left = 100 + Math.random() * (window.innerWidth - 300) + "px"
+  novoWow.style.top = wrapper.offsetHeight - 200 + "px"
+  document.body.appendChild(novoWow)
+  const cor = `rgb(${corIntensidade}, 0, ${255 - corIntensidade})`;
 
   if (wows === 10) {
-    lengthEl.innerText = "wow wow"
-  }
+    lengthEl.innerText = "Double wow";
+    lengthEl.style.color = `rgb(0, ${corIntensidade}, 0)`;
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 50) {
+    lengthEl.innerText = "Triple wow";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate"; 
+    pescoco.style.color = 'rgba(230,124,4)'
+  } else if (wows === 100) {
+    lengthEl.innerText = "Quadra wow";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 150) {
+    lengthEl.innerText = "Penta wow";
+    lengthEl.style.color = cor;
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate"; 
+  } else if (wows === 250) {
+    lengthEl.innerText = "Wow isso é Wow";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+    pescoco.style.color = 'rgba(0,250,3)'
+  } else if (wows === 500) {
+    lengthEl.innerText = "Incrível wow";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
 
-  if (wows === 50) {
-    lengthEl.innerText = "wow wow wow"
-  }
-
-  if (wows === 100) {
-    lengthEl.innerText = "much wow"
-  }
-
-  if (wows === 150) {
-    lengthEl.innerText = "long much wow"
-  }
-
-  if (wows === 250) {
-    lengthEl.innerText = "very long much wow"
-  }
-
-  if (wows === 500) {
-    lengthEl.innerText = "wow very long much wow"
-  }
-
-  if (wows === 1000) {
-    lengthEl.innerText = "much wow very long much wow!"
-  }
-
-  if (wows === 2000) {
-    lengthEl.innerText = "much wow very long much wow!!"
-  }
-
-  if (wows === 3000) {
-    lengthEl.innerText = "much wow very long much wow!!!"
-  }
-
-  if (wows === 5000) {
-    lengthEl.innerText = "!!much wow very long much wow!!"
-  }
-
-  if (wows === 10000) {
-    lengthEl.innerText = "many many wow amaze"
-  }
-
-  if (wows === 30000) {
-    lengthEl.innerText = "amaze wow dont forget to print!"
-  }
-
-  if (wows === 50000) {
-    lengthEl.innerText = "wowwowowowowowowowowowowwoow"
-  }
-
-  if (wows === 80000) {
-    lengthEl.innerText = "wowwowowowowowowowowowowwooweeeeeeeeee"
+  } else if (wows === 1000) {
+    lengthEl.innerText = "Muitos wows";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+    pescoco.style.color = 'rgba(100,200,50)'
+  } else if (wows === 2000) {
+    lengthEl.innerText = "Muitos wows mesmo";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 3000) {
+    lengthEl.innerText = "Ultra Wow";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 5000) {
+    lengthEl.innerText = "UWU";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+    pescoco.style.color = 'rgba(10,20,50)'
+  } else if (wows === 10000) {
+    lengthEl.innerText = "Giga WOW";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 30000) {
+    lengthEl.innerText = "WowowoW";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 50000) {
+    lengthEl.innerText = "oWo";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
+  } else if (wows === 80000) {
+    lengthEl.innerText = "OWOWOWOWOWOWOOWOWOWOWOO";
+    lengthEl.style.color = cor; 
+    novoWow.innerText = "POWER UP";
+    novoWow.style.animation = "fire 0.5s infinite alternate";
   }
 
   if (wows > 200 && Math.random() > 0.99) {
@@ -148,27 +161,42 @@ function injectWow() {
   }
 }
 
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+  @keyframes fire {
+    from {
+      color: #FF5722;
+      text-shadow: 0 0 10px #FF5722, 0 0 20px #FF5722, 0 0 40px #FF5722, 0 0 80px #FF5722, 0 0 160px #FF5722;
+      background-color: orange
+    }
+    to {
+      color: #FFA000;
+      text-shadow: 0 0 10px #FFA000, 0 0 20px #FFA000, 0 0 40px #FFA000, 0 0 80px #FFA000, 0 0 160px #FFA000;
+      background-color: red
+    }
+  }
+`, styleSheet.cssRules.length);
+
 function injectLargeWow() {
-  largewows++
-  largewowEl.innerText = largewows
+  grandewow++
+  largewowEl.innerText = grandewow
 
-  largeWowContainer.classList.remove("hidden")
+  containerGrandeWow.classList.remove("hidden")
 
-  const newWow = document.createElement("div")
-  newWow.className = "largewow"
-  newWow.innerText = "WOW"
-  newWow.style.left = "50%"
-  newWow.style.top = wrapper.offsetHeight - 200 + "px"
-  document.body.appendChild(newWow)
+  const novoWow = document.createElement("div")
+  novoWow.className = "largewow"
+  novoWow.innerText = "WOW"
+  novoWow.style.left = "50%"
+  novoWow.style.top = wrapper.offsetHeight - 200 + "px"
+  document.body.appendChild(novoWow)
 
-  // Release the text about the large wows on exactly 15
-  if(largewows === largeWowsRequired) {
-    rainbowwowcontainer.classList.remove("hidden")
-    dogePrimeContainer.classList.remove("hidden")
+  if(grandewow === grandewowRequired) {
+    wowArcoIriEl.classList.remove("hidden")
+    carameloPrimordial.classList.remove("hidden")
   }
 }
 
-function isPrime(n) {
+function Primo(n) {
   if (n < 2) return false
   var q = Math.floor(Math.sqrt(n))
 
@@ -185,48 +213,46 @@ function isSquare(n) {
   return n > 0 && Math.sqrt(n) % 1 === 0
 }
 
-function isFibonacci(numberToCheck) {
+function ConfereFibonacci(numberToCheck) {
   return (
     isSquare(5 * numberToCheck * numberToCheck + 4) ||
     isSquare(5 * numberToCheck * numberToCheck - 4)
   )
 }
 
-function shuffleArray(array) {
+function embaralhaArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[array[i], array[j]] = [array[j], array[i]]
   }
 }
 
-function onBodyClick(e) {
-  if (e.target.className === "textwow" && largewows >= largeWowsRequired) {
+function onClick(e) {
+  if (e.target.className === "textwow" && grandewow >= grandewowRequired) {
     rainbowwows++
     e.target.classList.add("rainbow")
 
-    rainbowsEl.innerText = rainbowwows
+    a.innerText = rainbowwows
 
     let count = 0
-    // Check if they have achieved dogePrime
-    let isPrime = primeWows.every((wowEl) => {
+    let Primo = primeWows.every((wowEl) => {
       count++
       return wowEl.classList.contains("rainbow")
     })
 
-    // Activate doge prime
-    if (dogePrime === false && isPrime === true) {
-      dogePrime = true
-      dogePrimeEl.innerText = "ACTIVE"
+    if (carameloPrime === false && Primo === true) {
+      carameloPrime = true
+      carameloPrimeEl.innerText = "ACTIVE"
       setupSecretWows()
     } else if (count !== primeWows.length) {
-      dogePrimeEl.innerText = "INACTIVE (" + count + '/' + primeWows.length + ")"
+      carameloPrimeEl.innerText = "INACTIVE (" + count + '/' + primeWows.length + ")"
     }
   }
 
   if (e.target.className === "secretwow") {
     e.target.classList.add("found")
     secretwows++
-    secretWowEl.innerText = secretwows
+    wowSecretoEl.innerText = secretwows
 
     if (secretwows === 100) {
       fibonacciChallengeStarted = true
@@ -302,35 +328,34 @@ function checkAllFiboWows() {
 function setupSecretWows() {
   secretWowContainer.classList.remove("hidden")
 
-  const allnecks = document.querySelectorAll(".neck")
-  let allnecksAsArray = Array.apply(null, allnecks)
-  allnecksAsArray.shift() // remove first item
+  const allpescocos = document.querySelectorAll(".pescoco")
+  let allpescocosAsArray = Array.apply(null, allpescocos)
+  allpescocosAsArray.shift() 
 
-  shuffleArray(allnecksAsArray)
-  shuffleArray(allnecksAsArray)
+  embaralhaArray(allpescocosAsArray)
+  embaralhaArray(allpescocosAsArray)
 
-  // Do this for first 100 shuffled neck pieces
   let total = 100
 
   for (let i = 0; i < total; i++) {
-    let neckItem = allnecksAsArray[i]
-    let pieces = neckItem.innerText.split("\n")
+    let pescocoItem = allpescocosAsArray[i]
+    let pieces = pescocoItem.innerText.split("\n")
     const pieceIndex = Math.floor(Math.random() * (pieces.length - 1))
     const injectionIndex = 5 + Math.floor(Math.random() * 18)
     pieces[pieceIndex] =
       pieces[pieceIndex].slice(0, injectionIndex) +
       '<span class="secretwow">WOW</span>' +
       pieces[pieceIndex].slice(injectionIndex + 3)
-    neckItem.innerHTML = pieces.join("\n")
+    pescocoItem.innerHTML = pieces.join("\n")
   }
 
   const allSecretwows = document.querySelectorAll(".secretwow")
   const secretWowsAsArray = Array.apply(null, allSecretwows)
   for (let i = 0; i < secretWowsAsArray.length; i++) {
-    if (isFibonacci(i + 1)) {
+    if (ConfereFibonacci(i + 1)) {
       fibonacciSecretWows.push(secretWowsAsArray[i])
     }
   }
 }
 
-observer.observe(neck)
+observer.observe(pescoco)

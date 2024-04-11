@@ -128,6 +128,8 @@ function AdicionaWow() {
     lengthEl.style.color = cor; 
     novoWow.innerText = "POWER UP";
     novoWow.style.animation = "fire 0.5s infinite alternate";
+    pescoco.style.animation = "fire 0.5s infinite alternate";
+
   } else if (wows === 5000) {
     lengthEl.innerText = "UWU";
     lengthEl.style.color = cor; 
